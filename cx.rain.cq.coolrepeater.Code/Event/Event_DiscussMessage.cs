@@ -1,0 +1,70 @@
+﻿using Native.Sdk.Cqp.EventArgs;
+using Native.Sdk.Cqp.Interface;
+using Native.Sdk.Cqp.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace cx.rain.cq.coolrepeater.Code.Event
+{
+    public class Event_DiscussMessage : IDiscussMessage
+    {
+        public void DiscussMessage(object sender, CQDiscussMessageEventArgs e)
+        {
+            var groupLastMessages = CoolRepeater.GroupLastMessages;
+            if (!groupLastMessages.ContainsKey($"D{e.FromDiscuss.Id}"))
+            {
+                groupLastMessages.Add($"D{e.FromDiscuss.Id}", new Tuple<long, QQMessage>(e.FromQQ.Id, e.Message));
+            }
+
+            var groupMessageSenders = CoolRepeater.GropuMessageSenders;
+            if (!groupMessageSenders.ContainsKey($"D{e.FromDiscuss.Id}"))
+            {
+                groupMessageSenders.Add($"D{e.FromDiscuss.Id}", new HashSet<long>());
+            }
+
+            var groupRepeatedMessage = CoolRepeater.GroupRepeatedMessages;
+            if (!groupRepeatedMessage.ContainsKey($"D{e.FromDiscuss.Id}"))
+            {
+                groupRepeatedMessage.Add($"D{e.FromDiscuss.Id}", e.Message);
+            }
+
+            var lastMessage = groupLastMessages[$"D{e.FromDiscuss.Id}"];
+            var senders = groupMessageSenders[$"D{e.FromDiscuss.Id}"];
+            var lastRepeated = groupRepeatedMessage[$"D{e.FromDiscuss.Id}"];
+            if (e.Message.Text != lastMessage.Item2.Text)
+            {
+                groupLastMessages[$"D{e.FromDiscuss.Id}"] = new Tuple<long, QQMessage>(e.FromQQ.Id, e.Message);
+                senders.Clear();
+                return;
+            }
+            else
+            {
+                senders.Add(e.FromQQ.Id);
+            }
+
+            if (lastRepeated.Text == e.Message.Text)
+            {
+                senders.Clear();
+                return;
+            }
+
+            if (senders.Count >= CoolRepeater.RepeatThreshold)
+            {
+                var repeatString = e.Message.ToSendString();
+                foreach (var s in CoolRepeater.BlockWords)
+                {
+                    if (repeatString.Contains(s))
+                    {
+                        senders.Clear();
+                        return;
+                    }
+                }
+                e.CQApi.SendDiscussMessage(e.FromDiscuss, repeatString);
+                senders.Clear();
+            }
+        }
+    }
+}
