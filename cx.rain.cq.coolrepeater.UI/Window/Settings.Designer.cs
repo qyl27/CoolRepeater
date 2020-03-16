@@ -133,9 +133,19 @@
             0,
             0,
             0});
+            this.numericUpDownRepeatThreshold.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.numericUpDownRepeatThreshold.Name = "numericUpDownRepeatThreshold";
             this.numericUpDownRepeatThreshold.Size = new System.Drawing.Size(45, 21);
             this.numericUpDownRepeatThreshold.TabIndex = 0;
+            this.numericUpDownRepeatThreshold.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // Settings
             // 

@@ -18,7 +18,7 @@ namespace cx.rain.cq.coolrepeater.Code.Config
 
             if (File.Exists(path))
             {
-                var config = JsonConvert.DeserializeObject<ConfigModel>(path);
+                var config = JsonConvert.DeserializeObject<ConfigModel>(File.ReadAllText(path));
                 CoolRepeater.RepeatThreshold = config.RepeatThreshold;
                 CoolRepeater.IgnoreAnonymous = config.IgnoreAnonymous;
                 CoolRepeater.BlockWords = config.BlockWords.ToList();

@@ -17,11 +17,11 @@ namespace cx.rain.cq.coolrepeater.Code.Event
             {
                 return;
             }
-
+            var noContentMessage = new QQMessage(e.CQApi, -1, string.Empty);
             var groupLastMessages = CoolRepeater.GroupLastMessages;
             if (!groupLastMessages.ContainsKey($"G{e.FromGroup.Id}"))
             {
-                groupLastMessages.Add($"G{e.FromGroup.Id}", new Tuple<long, QQMessage>(e.FromQQ.Id, e.Message));
+                groupLastMessages.Add($"G{e.FromGroup.Id}", new Tuple<long, QQMessage>(e.FromQQ.Id, noContentMessage));
             }
 
             var groupMessageSenders = CoolRepeater.GropuMessageSenders;
@@ -33,12 +33,13 @@ namespace cx.rain.cq.coolrepeater.Code.Event
             var groupRepeatedMessage = CoolRepeater.GroupRepeatedMessages;
             if (!groupRepeatedMessage.ContainsKey($"G{e.FromGroup.Id}"))
             {
-                groupRepeatedMessage.Add($"G{e.FromGroup.Id}", e.Message);
+                groupRepeatedMessage.Add($"G{e.FromGroup.Id}", noContentMessage);
             }
 
             var lastMessage = groupLastMessages[$"G{e.FromGroup.Id}"];
             var senders = groupMessageSenders[$"G{e.FromGroup.Id}"];
             var lastRepeated = groupRepeatedMessage[$"G{e.FromGroup.Id}"];
+
             if (e.Message.Text != lastMessage.Item2.Text)
             {
                 groupLastMessages[$"G{e.FromGroup.Id}"] = new Tuple<long, QQMessage>(e.FromQQ.Id, e.Message);
@@ -56,7 +57,7 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                 return;
             }
 
-            if (senders.Count >= CoolRepeater.RepeatThreshold)
+            if (senders.Count >= (CoolRepeater.RepeatThreshold - 1))
             {
                 var repeatString = e.Message.ToSendString();
                 foreach (var s in CoolRepeater.BlockWords)
@@ -68,6 +69,7 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                     }
                 }
                 e.CQApi.SendGroupMessage(e.FromGroup, repeatString);
+                groupRepeatedMessage[$"G{e.FromGroup.Id}"] = e.Message;
                 senders.Clear();
             }
         }

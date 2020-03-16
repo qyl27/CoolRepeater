@@ -13,10 +13,11 @@ namespace cx.rain.cq.coolrepeater.Code.Event
     {
         public void DiscussMessage(object sender, CQDiscussMessageEventArgs e)
         {
+            var noContentMessage = new QQMessage(e.CQApi, -1, string.Empty);
             var groupLastMessages = CoolRepeater.GroupLastMessages;
             if (!groupLastMessages.ContainsKey($"D{e.FromDiscuss.Id}"))
             {
-                groupLastMessages.Add($"D{e.FromDiscuss.Id}", new Tuple<long, QQMessage>(e.FromQQ.Id, e.Message));
+                groupLastMessages.Add($"D{e.FromDiscuss.Id}", new Tuple<long, QQMessage>(e.FromQQ.Id, noContentMessage));
             }
 
             var groupMessageSenders = CoolRepeater.GropuMessageSenders;
@@ -28,12 +29,13 @@ namespace cx.rain.cq.coolrepeater.Code.Event
             var groupRepeatedMessage = CoolRepeater.GroupRepeatedMessages;
             if (!groupRepeatedMessage.ContainsKey($"D{e.FromDiscuss.Id}"))
             {
-                groupRepeatedMessage.Add($"D{e.FromDiscuss.Id}", e.Message);
+                groupRepeatedMessage.Add($"D{e.FromDiscuss.Id}", noContentMessage);
             }
 
             var lastMessage = groupLastMessages[$"D{e.FromDiscuss.Id}"];
             var senders = groupMessageSenders[$"D{e.FromDiscuss.Id}"];
             var lastRepeated = groupRepeatedMessage[$"D{e.FromDiscuss.Id}"];
+
             if (e.Message.Text != lastMessage.Item2.Text)
             {
                 groupLastMessages[$"D{e.FromDiscuss.Id}"] = new Tuple<long, QQMessage>(e.FromQQ.Id, e.Message);
@@ -51,7 +53,7 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                 return;
             }
 
-            if (senders.Count >= CoolRepeater.RepeatThreshold)
+            if (senders.Count >= (CoolRepeater.RepeatThreshold - 1))
             {
                 var repeatString = e.Message.ToSendString();
                 foreach (var s in CoolRepeater.BlockWords)
@@ -63,6 +65,7 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                     }
                 }
                 e.CQApi.SendDiscussMessage(e.FromDiscuss, repeatString);
+                groupRepeatedMessage[$"D{e.FromDiscuss.Id}"] = e.Message;
                 senders.Clear();
             }
         }

@@ -15,12 +15,12 @@ namespace cx.rain.cq.coolrepeater.Code.Event
     {
         public void AppEnable(object sender, CQAppEnableEventArgs e)
         {
-            e.CQLog.Info("Cool复读机", "欢迎使用！");
+            e.CQLog.Info("信息", "欢迎使用！");
 
             var dataDir = e.CQApi.AppDirectory;
             var configPath = dataDir + "/config.json";
             ConfigWorker.Load(configPath);
-            e.CQLog.Info("Cool复读机", "配置文件加载完成。");
+            e.CQLog.Info("信息", "配置文件加载完成。");
         }
     }
 }

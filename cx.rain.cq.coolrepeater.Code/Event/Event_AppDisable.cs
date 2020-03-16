@@ -14,7 +14,7 @@ namespace cx.rain.cq.coolrepeater.Code.Event
         public void AppDisable(object sender, CQAppDisableEventArgs e)
         {
             ConfigWorker.Save(ConfigWorker.Path);
-            e.CQLog.Info("Cool复读机", "感谢使用！");
+            e.CQLog.Info("信息", "感谢使用！");
         }
     }
 }

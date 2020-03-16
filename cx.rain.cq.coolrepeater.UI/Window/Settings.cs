@@ -36,6 +36,7 @@ namespace cx.rain.cq.coolrepeater.UI.Window
                 CoolRepeater.BlockWords.Add(item.ToString());
             }
             ConfigWorker.Save(ConfigWorker.Path);
+            Close();
         }
 
         private void buttonBlockWordsRemoveSelect_Click(object sender, EventArgs e)
