@@ -20,6 +20,13 @@ namespace cx.rain.cq.coolrepeater.Code.Event
             var dataDir = e.CQApi.AppDirectory;
             var configPath = dataDir + "/config.json";
             ConfigWorker.Load(configPath);
+
+            foreach (var group in e.CQApi.GetGroupList())
+            {
+                CoolRepeater.EnabledGroups.Add(group.Group.Id);
+            }
+            ConfigWorker.Save(ConfigWorker.Path);
+
             e.CQLog.Info("信息", "配置文件加载完成。");
         }
     }

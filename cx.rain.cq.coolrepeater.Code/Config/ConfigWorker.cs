@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cx.rain.cq.coolrepeater.Code.Config
 {
@@ -21,29 +17,22 @@ namespace cx.rain.cq.coolrepeater.Code.Config
                 var config = JsonConvert.DeserializeObject<ConfigModel>(File.ReadAllText(path));
                 CoolRepeater.RepeatThreshold = config.RepeatThreshold;
                 CoolRepeater.IgnoreAnonymous = config.IgnoreAnonymous;
+                CoolRepeater.IgnorePicture = config.IgnorePicture;
+                CoolRepeater.RandomRepeatProbability = config.RandomRepeatProbability;
+                CoolRepeater.RepeatProbability = config.RepeatProbability;
                 CoolRepeater.BlockWords = config.BlockWords.ToList();
+                CoolRepeater.EnabledGroups = config.EnabledGroups.ToList();
+                CoolRepeater.DisabledGroups = config.DisabledGroups.ToList();
             }
             else
             {
-                var config = new ConfigModel()
-                {
-                    RepeatThreshold = CoolRepeater.RepeatThreshold,
-                    IgnoreAnonymous = CoolRepeater.IgnoreAnonymous,
-                    BlockWords = CoolRepeater.BlockWords.ToArray()
-                };
-                var configJson = JsonConvert.SerializeObject(config);
-                File.WriteAllText(path, configJson);
+                Save(path);
             }
         }
 
         public static void Save(string path)
         {
-            var config = new ConfigModel()
-            {
-                RepeatThreshold = CoolRepeater.RepeatThreshold,
-                IgnoreAnonymous = CoolRepeater.IgnoreAnonymous,
-                BlockWords = CoolRepeater.BlockWords.ToArray()
-            };
+            var config = new ConfigModel();
             var configJson = JsonConvert.SerializeObject(config);
             File.WriteAllText(path, configJson);
         }

@@ -70,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Window\GroupSpecialSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\GroupSpecialSettings.Designer.cs">
+      <DependentUpon>GroupSpecialSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Window\GroupSpecialSettings.resx">
+      <DependentUpon>GroupSpecialSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Window\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>

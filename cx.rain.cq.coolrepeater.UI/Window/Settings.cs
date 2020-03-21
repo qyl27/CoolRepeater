@@ -58,5 +58,15 @@ namespace cx.rain.cq.coolrepeater.UI.Window
                 MessageBox.Show("请在上面的文本框中填入所要拒绝复读的词汇。", "错误！", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void buttonGroupSpecialSetting_Click(object sender, EventArgs e)
+        {
+            new GroupSpecialSettings().Show();
+        }
+
+        private void checkBoxRandomRepeatProbability_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDownRepeatProbability.Enabled = checkBoxRandomRepeatProbability.Checked;
+        }
     }
 }

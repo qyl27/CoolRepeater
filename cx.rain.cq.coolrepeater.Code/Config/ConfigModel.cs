@@ -8,10 +8,20 @@ namespace cx.rain.cq.coolrepeater.Code.Config
 {
     public class ConfigModel
     {
-        public int RepeatThreshold { get; set; }
+        public int RepeatThreshold { get; set; } = 3;
 
-        public bool IgnoreAnonymous { get; set; }
+        public bool IgnoreAnonymous { get; set; } = true;
 
-        public string[] BlockWords { get; set; }
+        public bool IgnorePicture { get; set; } = false;
+
+        public bool RandomRepeatProbability { get; set; } = true;
+
+        public decimal RepeatProbability { get; set; } = 0.6M;
+
+        public string[] BlockWords { get; set; } = new string[] { };
+
+        public long[] EnabledGroups { get; set; } = new long[] { };
+
+        public long[] DisabledGroups { get; set; } = new long[] { };
     }
 }

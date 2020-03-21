@@ -13,6 +13,15 @@ namespace cx.rain.cq.coolrepeater.Code.Event
     {
         public void GroupMessage(object sender, CQGroupMessageEventArgs e)
         {
+            if (CoolRepeater.DisabledGroups.Contains(e.FromGroup.Id))
+            {
+                return;
+            }
+            if (!CoolRepeater.EnabledGroups.Contains(e.FromGroup.Id))
+            {
+                return;
+            }
+
             if (CoolRepeater.IgnoreAnonymous && e.IsFromAnonymous)
             {
                 return;
@@ -63,6 +72,23 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                 foreach (var s in CoolRepeater.BlockWords)
                 {
                     if (repeatString.Contains(s))
+                    {
+                        senders.Clear();
+                        return;
+                    }
+                }
+                if (CoolRepeater.RandomRepeatProbability)
+                {
+                    var random = new Random();
+                    if ((decimal) random.NextDouble() <= (decimal) random.NextDouble())
+                    {
+                        senders.Clear();
+                        return;
+                    }
+                }
+                else
+                {
+                    if ((decimal)new Random().NextDouble() <= CoolRepeater.RepeatProbability)
                     {
                         senders.Clear();
                         return;

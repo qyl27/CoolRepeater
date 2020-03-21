@@ -13,6 +13,15 @@ namespace cx.rain.cq.coolrepeater.Code.Event
     {
         public void DiscussMessage(object sender, CQDiscussMessageEventArgs e)
         {
+            if (CoolRepeater.DisabledGroups.Contains(e.FromDiscuss.Id))
+            {
+                return;
+            }
+            if (!CoolRepeater.EnabledGroups.Contains(e.FromDiscuss.Id))
+            {
+                return;
+            }
+
             var noContentMessage = new QQMessage(e.CQApi, -1, string.Empty);
             var groupLastMessages = CoolRepeater.GroupLastMessages;
             if (!groupLastMessages.ContainsKey($"D{e.FromDiscuss.Id}"))
@@ -59,6 +68,22 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                 foreach (var s in CoolRepeater.BlockWords)
                 {
                     if (repeatString.Contains(s))
+                    {
+                        senders.Clear();
+                        return;
+                    }
+                }
+                if (CoolRepeater.RandomRepeatProbability)
+                {
+                    if (new Random().Next(2) == 0)
+                    {
+                        senders.Clear();
+                        return;
+                    }
+                }
+                else
+                {
+                    if ((decimal) new Random().NextDouble() >= CoolRepeater.RepeatProbability)
                     {
                         senders.Clear();
                         return;

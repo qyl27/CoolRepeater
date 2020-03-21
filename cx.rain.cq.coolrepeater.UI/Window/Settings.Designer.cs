@@ -39,7 +39,13 @@
             this.buttonBlockWordsAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.numericUpDownRepeatThreshold = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxIgnorePicture = new System.Windows.Forms.CheckBox();
+            this.buttonGroupSpecialSetting = new System.Windows.Forms.Button();
+            this.labelRepeatProbability = new System.Windows.Forms.Label();
+            this.numericUpDownRepeatProbability = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxRandomRepeatProbability = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRepeatThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRepeatProbability)).BeginInit();
             this.SuspendLayout();
             // 
             // labelRepeatThresholdLeft
@@ -63,7 +69,7 @@
             // checkBoxIgnoreAnonymous
             // 
             this.checkBoxIgnoreAnonymous.AutoSize = true;
-            this.checkBoxIgnoreAnonymous.Location = new System.Drawing.Point(138, 162);
+            this.checkBoxIgnoreAnonymous.Location = new System.Drawing.Point(138, 131);
             this.checkBoxIgnoreAnonymous.Name = "checkBoxIgnoreAnonymous";
             this.checkBoxIgnoreAnonymous.Size = new System.Drawing.Size(132, 16);
             this.checkBoxIgnoreAnonymous.TabIndex = 5;
@@ -74,15 +80,15 @@
             // 
             this.listBoxBlackWords.FormattingEnabled = true;
             this.listBoxBlackWords.ItemHeight = 12;
-            this.listBoxBlackWords.Location = new System.Drawing.Point(12, 56);
+            this.listBoxBlackWords.Location = new System.Drawing.Point(12, 44);
             this.listBoxBlackWords.Name = "listBoxBlackWords";
-            this.listBoxBlackWords.Size = new System.Drawing.Size(120, 184);
+            this.listBoxBlackWords.Size = new System.Drawing.Size(120, 208);
             this.listBoxBlackWords.TabIndex = 1;
             // 
             // labelBlackWords
             // 
             this.labelBlackWords.AutoSize = true;
-            this.labelBlackWords.Location = new System.Drawing.Point(10, 41);
+            this.labelBlackWords.Location = new System.Drawing.Point(10, 31);
             this.labelBlackWords.Name = "labelBlackWords";
             this.labelBlackWords.Size = new System.Drawing.Size(221, 12);
             this.labelBlackWords.TabIndex = 5;
@@ -90,7 +96,7 @@
             // 
             // buttonBlockWordsRemoveSelect
             // 
-            this.buttonBlockWordsRemoveSelect.Location = new System.Drawing.Point(138, 56);
+            this.buttonBlockWordsRemoveSelect.Location = new System.Drawing.Point(138, 46);
             this.buttonBlockWordsRemoveSelect.Name = "buttonBlockWordsRemoveSelect";
             this.buttonBlockWordsRemoveSelect.Size = new System.Drawing.Size(121, 23);
             this.buttonBlockWordsRemoveSelect.TabIndex = 2;
@@ -100,14 +106,14 @@
             // 
             // textBoxBlockWordsAdd
             // 
-            this.textBoxBlockWordsAdd.Location = new System.Drawing.Point(138, 94);
+            this.textBoxBlockWordsAdd.Location = new System.Drawing.Point(138, 75);
             this.textBoxBlockWordsAdd.Name = "textBoxBlockWordsAdd";
             this.textBoxBlockWordsAdd.Size = new System.Drawing.Size(121, 21);
             this.textBoxBlockWordsAdd.TabIndex = 3;
             // 
             // buttonBlockWordsAdd
             // 
-            this.buttonBlockWordsAdd.Location = new System.Drawing.Point(138, 121);
+            this.buttonBlockWordsAdd.Location = new System.Drawing.Point(138, 102);
             this.buttonBlockWordsAdd.Name = "buttonBlockWordsAdd";
             this.buttonBlockWordsAdd.Size = new System.Drawing.Size(121, 23);
             this.buttonBlockWordsAdd.TabIndex = 4;
@@ -117,9 +123,9 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(138, 184);
+            this.buttonSave.Location = new System.Drawing.Point(11, 256);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(121, 53);
+            this.buttonSave.Size = new System.Drawing.Size(247, 46);
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -142,16 +148,84 @@
             this.numericUpDownRepeatThreshold.Size = new System.Drawing.Size(45, 21);
             this.numericUpDownRepeatThreshold.TabIndex = 0;
             this.numericUpDownRepeatThreshold.Value = new decimal(new int[] {
-            2,
+            3,
             0,
             0,
             0});
+            // 
+            // checkBoxIgnorePicture
+            // 
+            this.checkBoxIgnorePicture.AutoSize = true;
+            this.checkBoxIgnorePicture.Location = new System.Drawing.Point(138, 153);
+            this.checkBoxIgnorePicture.Name = "checkBoxIgnorePicture";
+            this.checkBoxIgnorePicture.Size = new System.Drawing.Size(108, 16);
+            this.checkBoxIgnorePicture.TabIndex = 7;
+            this.checkBoxIgnorePicture.Text = "忽略图片的复读";
+            this.checkBoxIgnorePicture.UseVisualStyleBackColor = true;
+            // 
+            // buttonGroupSpecialSetting
+            // 
+            this.buttonGroupSpecialSetting.Location = new System.Drawing.Point(138, 226);
+            this.buttonGroupSpecialSetting.Name = "buttonGroupSpecialSetting";
+            this.buttonGroupSpecialSetting.Size = new System.Drawing.Size(120, 24);
+            this.buttonGroupSpecialSetting.TabIndex = 8;
+            this.buttonGroupSpecialSetting.Text = "分群复读设置";
+            this.buttonGroupSpecialSetting.UseVisualStyleBackColor = true;
+            this.buttonGroupSpecialSetting.Click += new System.EventHandler(this.buttonGroupSpecialSetting_Click);
+            // 
+            // labelRepeatProbability
+            // 
+            this.labelRepeatProbability.AutoSize = true;
+            this.labelRepeatProbability.Location = new System.Drawing.Point(137, 201);
+            this.labelRepeatProbability.Name = "labelRepeatProbability";
+            this.labelRepeatProbability.Size = new System.Drawing.Size(77, 12);
+            this.labelRepeatProbability.TabIndex = 9;
+            this.labelRepeatProbability.Text = "复读几率为：";
+            // 
+            // numericUpDownRepeatProbability
+            // 
+            this.numericUpDownRepeatProbability.DecimalPlaces = 2;
+            this.numericUpDownRepeatProbability.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.numericUpDownRepeatProbability.Location = new System.Drawing.Point(213, 199);
+            this.numericUpDownRepeatProbability.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownRepeatProbability.Name = "numericUpDownRepeatProbability";
+            this.numericUpDownRepeatProbability.Size = new System.Drawing.Size(45, 21);
+            this.numericUpDownRepeatProbability.TabIndex = 10;
+            this.numericUpDownRepeatProbability.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            65536});
+            // 
+            // checkBoxRandomRepeatProbability
+            // 
+            this.checkBoxRandomRepeatProbability.AutoSize = true;
+            this.checkBoxRandomRepeatProbability.Location = new System.Drawing.Point(138, 175);
+            this.checkBoxRandomRepeatProbability.Name = "checkBoxRandomRepeatProbability";
+            this.checkBoxRandomRepeatProbability.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxRandomRepeatProbability.TabIndex = 11;
+            this.checkBoxRandomRepeatProbability.Text = "随机复读概率";
+            this.checkBoxRandomRepeatProbability.UseVisualStyleBackColor = true;
+            this.checkBoxRandomRepeatProbability.CheckedChanged += new System.EventHandler(this.checkBoxRandomRepeatProbability_CheckedChanged);
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(271, 249);
+            this.ClientSize = new System.Drawing.Size(271, 314);
+            this.Controls.Add(this.checkBoxRandomRepeatProbability);
+            this.Controls.Add(this.numericUpDownRepeatProbability);
+            this.Controls.Add(this.labelRepeatProbability);
+            this.Controls.Add(this.buttonGroupSpecialSetting);
+            this.Controls.Add(this.checkBoxIgnorePicture);
             this.Controls.Add(this.numericUpDownRepeatThreshold);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonBlockWordsAdd);
@@ -166,6 +240,7 @@
             this.Name = "Settings";
             this.Text = "Cool复读机选项";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRepeatThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRepeatProbability)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +258,10 @@
         private System.Windows.Forms.Button buttonBlockWordsAdd;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.NumericUpDown numericUpDownRepeatThreshold;
+        private System.Windows.Forms.CheckBox checkBoxIgnorePicture;
+        private System.Windows.Forms.Button buttonGroupSpecialSetting;
+        private System.Windows.Forms.Label labelRepeatProbability;
+        private System.Windows.Forms.NumericUpDown numericUpDownRepeatProbability;
+        private System.Windows.Forms.CheckBox checkBoxRandomRepeatProbability;
     }
 }
