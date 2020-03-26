@@ -21,10 +21,8 @@ namespace cx.rain.cq.coolrepeater.Code.Event
             var configPath = dataDir + "/config.json";
             ConfigWorker.Load(configPath);
 
-            foreach (var group in e.CQApi.GetGroupList())
-            {
-                CoolRepeater.EnabledGroups.Add(group.Group.Id);
-            }
+            CoolRepeater.Api = e.CQApi;
+
             ConfigWorker.Save(ConfigWorker.Path);
 
             e.CQLog.Info("信息", "配置文件加载完成。");

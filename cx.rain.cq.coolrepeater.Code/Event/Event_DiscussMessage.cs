@@ -22,6 +22,12 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                 return;
             }
 
+            if (CoolRepeater.IgnorePicture
+                && e.Message.CQCodes.FirstOrDefault(c => c.Function == Native.Sdk.Cqp.Enum.CQFunction.Image) != null)
+            {
+                return;
+            }
+
             var noContentMessage = new QQMessage(e.CQApi, -1, string.Empty);
             var groupLastMessages = CoolRepeater.GroupLastMessages;
             if (!groupLastMessages.ContainsKey($"D{e.FromDiscuss.Id}"))
@@ -73,22 +79,16 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                         return;
                     }
                 }
-                if (CoolRepeater.RandomRepeatProbability)
+
+                if ((decimal)new Random().NextDouble() <= CoolRepeater.RepeatProbability)
                 {
-                    if (new Random().Next(2) == 0)
+                    if (CoolRepeater.GreaterChancesMoreRepeat)
                     {
                         senders.Clear();
-                        return;
                     }
+                    return;
                 }
-                else
-                {
-                    if ((decimal) new Random().NextDouble() >= CoolRepeater.RepeatProbability)
-                    {
-                        senders.Clear();
-                        return;
-                    }
-                }
+
                 e.CQApi.SendDiscussMessage(e.FromDiscuss, repeatString);
                 groupRepeatedMessage[$"D{e.FromDiscuss.Id}"] = e.Message;
                 senders.Clear();

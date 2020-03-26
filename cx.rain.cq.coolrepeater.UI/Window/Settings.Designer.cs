@@ -43,7 +43,7 @@
             this.buttonGroupSpecialSetting = new System.Windows.Forms.Button();
             this.labelRepeatProbability = new System.Windows.Forms.Label();
             this.numericUpDownRepeatProbability = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxRandomRepeatProbability = new System.Windows.Forms.CheckBox();
+            this.checkBoxGreaterChancesMoreRepeat = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRepeatThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRepeatProbability)).BeginInit();
             this.SuspendLayout();
@@ -176,7 +176,7 @@
             // labelRepeatProbability
             // 
             this.labelRepeatProbability.AutoSize = true;
-            this.labelRepeatProbability.Location = new System.Drawing.Point(137, 201);
+            this.labelRepeatProbability.Location = new System.Drawing.Point(138, 177);
             this.labelRepeatProbability.Name = "labelRepeatProbability";
             this.labelRepeatProbability.Size = new System.Drawing.Size(77, 12);
             this.labelRepeatProbability.TabIndex = 9;
@@ -190,7 +190,7 @@
             0,
             0,
             131072});
-            this.numericUpDownRepeatProbability.Location = new System.Drawing.Point(213, 199);
+            this.numericUpDownRepeatProbability.Location = new System.Drawing.Point(214, 175);
             this.numericUpDownRepeatProbability.Maximum = new decimal(new int[] {
             1,
             0,
@@ -205,23 +205,22 @@
             0,
             65536});
             // 
-            // checkBoxRandomRepeatProbability
+            // checkBoxGreaterChancesMoreRepeat
             // 
-            this.checkBoxRandomRepeatProbability.AutoSize = true;
-            this.checkBoxRandomRepeatProbability.Location = new System.Drawing.Point(138, 175);
-            this.checkBoxRandomRepeatProbability.Name = "checkBoxRandomRepeatProbability";
-            this.checkBoxRandomRepeatProbability.Size = new System.Drawing.Size(96, 16);
-            this.checkBoxRandomRepeatProbability.TabIndex = 11;
-            this.checkBoxRandomRepeatProbability.Text = "随机复读概率";
-            this.checkBoxRandomRepeatProbability.UseVisualStyleBackColor = true;
-            this.checkBoxRandomRepeatProbability.CheckedChanged += new System.EventHandler(this.checkBoxRandomRepeatProbability_CheckedChanged);
+            this.checkBoxGreaterChancesMoreRepeat.AutoSize = true;
+            this.checkBoxGreaterChancesMoreRepeat.Location = new System.Drawing.Point(140, 202);
+            this.checkBoxGreaterChancesMoreRepeat.Name = "checkBoxGreaterChancesMoreRepeat";
+            this.checkBoxGreaterChancesMoreRepeat.Size = new System.Drawing.Size(120, 16);
+            this.checkBoxGreaterChancesMoreRepeat.TabIndex = 11;
+            this.checkBoxGreaterChancesMoreRepeat.Text = "复读越多几率越大";
+            this.checkBoxGreaterChancesMoreRepeat.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(271, 314);
-            this.Controls.Add(this.checkBoxRandomRepeatProbability);
+            this.Controls.Add(this.checkBoxGreaterChancesMoreRepeat);
             this.Controls.Add(this.numericUpDownRepeatProbability);
             this.Controls.Add(this.labelRepeatProbability);
             this.Controls.Add(this.buttonGroupSpecialSetting);
@@ -262,6 +261,6 @@
         private System.Windows.Forms.Button buttonGroupSpecialSetting;
         private System.Windows.Forms.Label labelRepeatProbability;
         private System.Windows.Forms.NumericUpDown numericUpDownRepeatProbability;
-        private System.Windows.Forms.CheckBox checkBoxRandomRepeatProbability;
+        private System.Windows.Forms.CheckBox checkBoxGreaterChancesMoreRepeat;
     }
 }

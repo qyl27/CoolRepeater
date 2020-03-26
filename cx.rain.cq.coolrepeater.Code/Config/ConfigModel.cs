@@ -14,7 +14,7 @@ namespace cx.rain.cq.coolrepeater.Code.Config
 
         public bool IgnorePicture { get; set; } = false;
 
-        public bool RandomRepeatProbability { get; set; } = true;
+        public bool GreaterChancesMoreRepeat { get; set; } = true;
 
         public decimal RepeatProbability { get; set; } = 0.6M;
 

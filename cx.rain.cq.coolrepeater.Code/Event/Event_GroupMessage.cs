@@ -22,6 +22,12 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                 return;
             }
 
+            if (CoolRepeater.IgnorePicture
+                && e.Message.CQCodes.FirstOrDefault(c => c.Function == Native.Sdk.Cqp.Enum.CQFunction.Image) != null)
+            {
+                return;
+            }
+
             if (CoolRepeater.IgnoreAnonymous && e.IsFromAnonymous)
             {
                 return;
@@ -77,23 +83,16 @@ namespace cx.rain.cq.coolrepeater.Code.Event
                         return;
                     }
                 }
-                if (CoolRepeater.RandomRepeatProbability)
+
+                if ((decimal)new Random().NextDouble() <= CoolRepeater.RepeatProbability)
                 {
-                    var random = new Random();
-                    if ((decimal) random.NextDouble() <= (decimal) random.NextDouble())
+                    if (CoolRepeater.GreaterChancesMoreRepeat)
                     {
                         senders.Clear();
-                        return;
                     }
+                    return;
                 }
-                else
-                {
-                    if ((decimal)new Random().NextDouble() <= CoolRepeater.RepeatProbability)
-                    {
-                        senders.Clear();
-                        return;
-                    }
-                }
+
                 e.CQApi.SendGroupMessage(e.FromGroup, repeatString);
                 groupRepeatedMessage[$"G{e.FromGroup.Id}"] = e.Message;
                 senders.Clear();

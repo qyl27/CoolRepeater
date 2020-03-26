@@ -2,8 +2,8 @@
 	"ret": 1,
 	"apiver": 9,
 	"name": "Cool复读机",
-	"version": "1.0.0",
-	"version_id": 1,
+	"version": "1.1.0",
+	"version_id": 2,
 	"author": "秋雨落",
 	"description": "这个问题我没办法和你解释，因为我只是一只小小的复读机。",
 	"event": [
@@ -44,6 +44,7 @@
 	],
 	"status": [],
 	"auth": [
-		101
+		101, 
+		161
 	]
 }

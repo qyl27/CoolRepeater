@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GroupSpecialSettings));
             this.listBoxEnableGroup = new System.Windows.Forms.ListBox();
             this.labelEnableRepeat = new System.Windows.Forms.Label();
             this.labelDisableGroup = new System.Windows.Forms.Label();
@@ -101,6 +102,7 @@
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // GroupSpecialSettings
             // 
@@ -114,6 +116,7 @@
             this.Controls.Add(this.listBoxDisableGroup);
             this.Controls.Add(this.labelEnableRepeat);
             this.Controls.Add(this.listBoxEnableGroup);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GroupSpecialSettings";
             this.Text = "分群复读设置";
             this.ResumeLayout(false);

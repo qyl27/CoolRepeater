@@ -20,6 +20,10 @@ namespace cx.rain.cq.coolrepeater.UI.Window
 
             numericUpDownRepeatThreshold.Value = CoolRepeater.RepeatThreshold;
             checkBoxIgnoreAnonymous.Checked = CoolRepeater.IgnoreAnonymous;
+            checkBoxIgnorePicture.Checked = CoolRepeater.IgnorePicture;
+            numericUpDownRepeatProbability.Value = CoolRepeater.RepeatProbability;
+            checkBoxGreaterChancesMoreRepeat.Checked = CoolRepeater.GreaterChancesMoreRepeat;
+
             foreach (var item in CoolRepeater.BlockWords)
             {
                 listBoxBlackWords.Items.Add(item);
@@ -30,6 +34,10 @@ namespace cx.rain.cq.coolrepeater.UI.Window
         {
             CoolRepeater.RepeatThreshold = (int) numericUpDownRepeatThreshold.Value;
             CoolRepeater.IgnoreAnonymous = checkBoxIgnoreAnonymous.Checked;
+            CoolRepeater.IgnorePicture = checkBoxIgnorePicture.Checked;
+            CoolRepeater.RepeatProbability = numericUpDownRepeatProbability.Value;
+            CoolRepeater.GreaterChancesMoreRepeat = checkBoxGreaterChancesMoreRepeat.Checked;
+
             CoolRepeater.BlockWords.Clear();
             foreach (var item in listBoxBlackWords.Items)
             {
@@ -62,11 +70,6 @@ namespace cx.rain.cq.coolrepeater.UI.Window
         private void buttonGroupSpecialSetting_Click(object sender, EventArgs e)
         {
             new GroupSpecialSettings().Show();
-        }
-
-        private void checkBoxRandomRepeatProbability_CheckedChanged(object sender, EventArgs e)
-        {
-            numericUpDownRepeatProbability.Enabled = checkBoxRandomRepeatProbability.Checked;
         }
     }
 }

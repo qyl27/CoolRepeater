@@ -18,7 +18,7 @@ namespace cx.rain.cq.coolrepeater.Code.Config
                 CoolRepeater.RepeatThreshold = config.RepeatThreshold;
                 CoolRepeater.IgnoreAnonymous = config.IgnoreAnonymous;
                 CoolRepeater.IgnorePicture = config.IgnorePicture;
-                CoolRepeater.RandomRepeatProbability = config.RandomRepeatProbability;
+                CoolRepeater.GreaterChancesMoreRepeat = config.GreaterChancesMoreRepeat;
                 CoolRepeater.RepeatProbability = config.RepeatProbability;
                 CoolRepeater.BlockWords = config.BlockWords.ToList();
                 CoolRepeater.EnabledGroups = config.EnabledGroups.ToList();
@@ -32,7 +32,17 @@ namespace cx.rain.cq.coolrepeater.Code.Config
 
         public static void Save(string path)
         {
-            var config = new ConfigModel();
+            var config = new ConfigModel()
+            {
+                IgnoreAnonymous = CoolRepeater.IgnoreAnonymous,
+                IgnorePicture = CoolRepeater.IgnorePicture,
+                RepeatThreshold = CoolRepeater.RepeatThreshold,
+                GreaterChancesMoreRepeat = CoolRepeater.GreaterChancesMoreRepeat,
+                RepeatProbability = CoolRepeater.RepeatProbability,
+                BlockWords = CoolRepeater.BlockWords.ToArray(), 
+                DisabledGroups = CoolRepeater.DisabledGroups.ToArray(), 
+                EnabledGroups = CoolRepeater.EnabledGroups.ToArray()
+            };
             var configJson = JsonConvert.SerializeObject(config);
             File.WriteAllText(path, configJson);
         }
